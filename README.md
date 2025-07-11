@@ -24,9 +24,8 @@ API ini dikembangkan untuk proyek MX100, sebuah portal pekerjaan yang menghubung
 
 Ikuti langkah-langkah di bawah ini untuk menginstal dan menjalankan proyek secara lokal:
 
-1. Kloning Repositori (atau Buat Proyek Baru):  
-   Jika Anda membuat proyek baru, lewati langkah ini dan buat proyek Laravel baru.  
-   `composer create-project laravel/laravel mx100-api`  
+1. Kloning Repositori:  
+   `git clone https://github.com/ohchiko/tes_kopnus.git mx100-api`  
    `cd mx100-api`
 
 2. **Instal Dependensi Composer:**  
