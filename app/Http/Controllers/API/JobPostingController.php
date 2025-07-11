@@ -32,12 +32,21 @@ class JobPostingController extends BaseAPIController
         ], "Created.", 201);
     }
 
-    public function publish(PublishJobPostingRequest $request, JobPosting $jobPosting)
+    public function publish(PublishJobPostingRequest $request, int $jobPosting)
     {
-        $jobPosting = $this->jobPostingService->publish($jobPosting, $request->validated("published_at"));
+        $jobPosting = $this->jobPostingService->publish($request->validated("published_at"), $jobPosting, $request->user());
 
         return $this->success([
             "job_posting" => $jobPosting->toResource()
         ], "Published.", 200);
+    }
+
+    public function applications(Request $request, int $jobPosting)
+    {
+        $applications = $this->jobPostingService->getApplications($jobPosting, $request->user());
+
+        return $this->success([
+            "applications" => $applications->toResourceCollection()
+        ]);
     }
 }

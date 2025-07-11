@@ -12,5 +12,9 @@ interface JobPostingRepositoryInterface
 
     public function findPublishedById(int $id): JobPosting;
 
+    public function findDraftById(int $id): JobPosting;
+
     public function createForUser(array $data, User $user): JobPosting;
+
+    public function getApplications(JobPosting $jobPosting): Collection;
 }

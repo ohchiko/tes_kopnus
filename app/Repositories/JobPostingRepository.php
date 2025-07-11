@@ -18,8 +18,18 @@ class JobPostingRepository implements JobPostingRepositoryInterface
         return JobPosting::published()->findOrFail($id);
     }
 
+    public function findDraftById(int $id): JobPosting
+    {
+        return JobPosting::draft()->findOrFail($id);
+    }
+
     public function createForUser(array $data, User $user): JobPosting
     {
         return $user->jobPostings()->create($data);
+    }
+
+    public function getApplications(JobPosting $jobPosting): Collection
+    {
+        return $jobPosting->applications;
     }
 }

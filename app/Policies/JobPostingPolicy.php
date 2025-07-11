@@ -17,11 +17,11 @@ class JobPostingPolicy
     }
 
     /**
-     * Determine whether the user can view the model.
+     * Determine whether the user can view models.
      */
     public function view(User $user, JobPosting $jobPosting): bool
     {
-        return false;
+        return $jobPosting->user_id === $user->getKey();
     }
 
     /**
@@ -30,5 +30,13 @@ class JobPostingPolicy
     public function create(User $user): bool
     {
         return $user->hasRole("client");
+    }
+
+    /**
+     * Determine whether the user can update models.
+     */
+    public function update(User $user, JobPosting $jobPosting): bool
+    {
+        return $jobPosting->user_id === $user->getKey();
     }
 }

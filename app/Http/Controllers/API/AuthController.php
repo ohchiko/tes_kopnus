@@ -20,11 +20,4 @@ class AuthController extends BaseAPIController
             "token" => $token
         ]);
     }
-
-    public function user(Request $request)
-    {
-        return $this->success([
-            "user" => $request->user()->toResource()
-        ]);
-    }
 }

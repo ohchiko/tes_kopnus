@@ -8,6 +8,7 @@ use App\Repositories\ApplicationRepositoryInterface;
 use App\Repositories\JobPostingRepositoryInterface;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 class ApplicationService
 {
@@ -24,7 +25,7 @@ class ApplicationService
 
         $jobPosting = $this->jobPostingRepository->findPublishedById($data["job_posting_id"]);
 
-        $cvPath = $cv->store("cvs");
+        $cvPath = Storage::disk("application")->putFile("cv", $cv);
 
         return $this->applicationRepository->createForUserForJobPosting(
             ["cv_path" => $cvPath],

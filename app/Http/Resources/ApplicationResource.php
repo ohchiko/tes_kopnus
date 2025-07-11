@@ -18,6 +18,7 @@ class ApplicationResource extends JsonResource
             "id" => $this->id,
             "jobPosting" => $this->jobPosting->toResource(),
             "freelancer" => $this->freelancer->toResource(),
+            "cv_path" => $this->cv_path,
             "is_approved" => isset($this->approved_at),
             "approved_at" => $this->approved_at,
             "is_completed" => isset($this->completed_at),

@@ -16,7 +16,7 @@ class JobPostingService
 
     public function listPublished(User $user): Collection
     {
-        if (! $user->can("viewAny", JobPosting::class)) {
+        if ($user->cannot("viewAny", JobPosting::class)) {
             throw new AuthorizationException();
         }
 
@@ -25,18 +25,35 @@ class JobPostingService
 
     public function create(array $data, User $user): JobPosting
     {
-        if (! $user->can("create", JobPosting::class)) {
+        if ($user->cannot("create", JobPosting::class)) {
             throw new AuthorizationException();
         }
 
         return $this->jobPostingRepository->createForUser($data, $user);
     }
 
-    public function publish(JobPosting $jobPosting, $dateTime = null): JobPosting
+    public function publish($dateTime, int $jobPosting, User $user): JobPosting
     {
+        $jobPosting = $this->jobPostingRepository->findDraftById($jobPosting);
+
+        if ($user->cannot("update", $jobPosting)) {
+            throw new AuthorizationException();
+        }
+
         $jobPosting->published_at = $dateTime;
         $jobPosting->save();
 
         return $jobPosting;
+    }
+
+    public function getApplications(int $jobPosting, User $user): Collection
+    {
+        $jobPosting = $this->jobPostingRepository->findPublishedById($jobPosting);
+
+        if ($user->cannot("view", $jobPosting)) {
+            throw new AuthorizationException();
+        }
+
+        return $this->jobPostingRepository->getApplications($jobPosting);
     }
 }

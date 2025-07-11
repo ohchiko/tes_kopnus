@@ -27,6 +27,11 @@ class JobPosting extends Model
         ];
     }
 
+    public function scopeDraft(Builder $query): void
+    {
+        $query->whereNull("published_at");
+    }
+
     public function scopePublished(Builder $query): void
     {
         $query->whereNotNull("published_at");

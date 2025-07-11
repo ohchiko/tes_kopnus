@@ -2,9 +2,11 @@
 
 namespace Tests\Feature;
 
+use App\Models\Application;
 use App\Models\JobPosting;
 use App\Models\Role;
 use App\Models\User;
+use App\Repositories\UserRepositoryInterface;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
@@ -52,7 +54,7 @@ class ApplicationTest extends TestCase
             ->published()
             ->create();
 
-        Storage::fake("applications");
+        Storage::fake("application");
 
         $file = UploadedFile::fake()->create("cv.pdf", 1024, "application/pdf");
 
@@ -69,6 +71,7 @@ class ApplicationTest extends TestCase
                         "id",
                         "jobPosting",
                         "freelancer",
+                        "cv_path",
                         "is_approved",
                         "approved_at",
                         "is_completed",
@@ -76,5 +79,9 @@ class ApplicationTest extends TestCase
                     ]
                 ]
             ]);
+
+        $filePath = $response->json("data.application.cv_path");
+
+        Storage::disk("application")->assertExists($filePath);
     }
 }

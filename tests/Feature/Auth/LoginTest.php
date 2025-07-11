@@ -36,41 +36,4 @@ class LoginTest extends TestCase
                 ]
             ]);
     }
-
-    public function test_user_can_request_with_api_token()
-    {
-        $user = User::factory()
-            ->for(Role::factory())
-            ->create([
-                "email" => "gregorio@example.org",
-                "password" => "password"
-            ]);
-
-        $loginResponse = $this->postJson(route("api.login"), [
-            "email" => "gregorio@example.org",
-            "password" => "password"
-        ]);
-
-        $loginResponse->assertOk();
-
-        $token = $loginResponse->json("data.token");
-
-        $response = $this->withHeader("Authorization", "Bearer {$token}")
-            ->getJson(route("api.user"));
-
-        $response->assertOk()
-            ->assertJsonStructure([
-                "data" => [
-                    "user" => [
-                        "id",
-                        "role" => [
-                            "id",
-                            "name"
-                        ],
-                        "name",
-                        "email"
-                    ]
-                ]
-            ]);
-    }
 }
