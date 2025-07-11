@@ -13,6 +13,11 @@ class JobPostingRepository implements JobPostingRepositoryInterface
         return JobPosting::published()->get();
     }
 
+    public function findPublishedById(int $id): JobPosting
+    {
+        return JobPosting::published()->findOrFail($id);
+    }
+
     public function createForUser(array $data, User $user): JobPosting
     {
         return $user->jobPostings()->create($data);

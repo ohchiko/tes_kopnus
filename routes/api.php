@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\ApplicationController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\JobPostingController;
 use Illuminate\Http\Request;
@@ -17,6 +18,10 @@ Route::name("api.")->group(function () {
             Route::post("/", [JobPostingController::class, "store"])->middleware("role:client")->name("store");
 
             Route::put("/{jobPosting}/publish", [JobPostingController::class, "publish"])->middleware("role:client")->name("publish");
+        });
+
+        Route::name("applications.")->prefix("/applications")->group(function () {
+            Route::post("/", [ApplicationController::class, "store"])->middleware("role:freelancer")->name("store");
         });
     });
 });

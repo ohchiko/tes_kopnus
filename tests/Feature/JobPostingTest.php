@@ -13,8 +13,6 @@ class JobPostingTest extends TestCase
 {
     use RefreshDatabase;
 
-    private string $token;
-
     private function getToken(string $roleName = "client")
     {
         $dataUser = [
@@ -53,15 +51,7 @@ class JobPostingTest extends TestCase
                 "data" => [
                     "job_posting" => [
                         "id",
-                        "client" => [
-                            "id",
-                            "role" => [
-                                "id",
-                                "name"
-                            ],
-                            "name",
-                            "email"
-                        ],
+                        "client",
                         "title",
                         "description",
                         "salary",
@@ -120,10 +110,7 @@ class JobPostingTest extends TestCase
                                 "id",
                                 "role" => [
                                     "id",
-                                    "name"
                                 ],
-                                "name",
-                                "email"
                             ],
                             "title",
                             "description",

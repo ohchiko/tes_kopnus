@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\ApplicationRepository;
+use App\Repositories\ApplicationRepositoryInterface;
 use App\Repositories\JobPostingRepository;
 use App\Repositories\JobPostingRepositoryInterface;
 use App\Repositories\RoleRepository;
@@ -20,6 +22,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         $this->app->bind(RoleRepositoryInterface::class, RoleRepository::class);
         $this->app->bind(JobPostingRepositoryInterface::class, JobPostingRepository::class);
+        $this->app->bind(ApplicationRepositoryInterface::class, ApplicationRepository::class);
     }
 
     /**

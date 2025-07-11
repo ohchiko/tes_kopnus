@@ -2,11 +2,10 @@
 
 namespace App\Policies;
 
-use App\Models\JobPosting;
+use App\Models\Application;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
-class JobPostingPolicy
+class ApplicationPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -19,7 +18,7 @@ class JobPostingPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, JobPosting $jobPosting): bool
+    public function view(User $user, Application $application): bool
     {
         return false;
     }
@@ -29,6 +28,6 @@ class JobPostingPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole("client");
+        return $user->hasRole("freelancer");
     }
 }

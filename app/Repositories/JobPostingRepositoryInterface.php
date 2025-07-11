@@ -10,5 +10,7 @@ interface JobPostingRepositoryInterface
 {
     public function listPublished(): Collection;
 
+    public function findPublishedById(int $id): JobPosting;
+
     public function createForUser(array $data, User $user): JobPosting;
 }
