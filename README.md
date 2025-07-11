@@ -4,7 +4,7 @@ API ini dikembangkan untuk proyek MX100, sebuah portal pekerjaan yang menghubung
 
 ## **Fitur**
 
-* **Autentikasi Pengguna:** Pendaftaran dan *login* untuk perusahaan dan *freelancer* menggunakan Laravel Sanctum.  
+* **Autentikasi Pengguna:** *Login* untuk perusahaan (*client*) dan *freelancer* menggunakan Laravel Sanctum.  
 * **Manajemen Pekerjaan (Perusahaan):**  
   * Membuat dan memposting lowongan pekerjaan.  
   * Menyimpan lowongan pekerjaan sebagai draf.  
